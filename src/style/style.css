@@ -1,0 +1,97 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+* {
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  border: 1px solid #d3d3d3;
+  border-radius: 20px;
+  gap: 30px;
+}
+
+.form-header {
+  font-weight: 500;
+  font-size: 28px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.form-container input {
+  border: none;
+  padding: 5px;
+  font-size: 13px;
+  border-bottom: 0.5px solid #6991f3;
+  width: 300px;
+}
+
+.regBtn {
+  margin: 50px 0;
+  width: 300px;
+  height: 37px;
+  background: #ea4335;
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
+
+/* CSS FOR LOG PAGE */
+
+.signInBtn {
+  margin: 20px;
+  width: 300px;
+  height: 37px;
+  background: #ea4335;
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
+
+.linkReg {
+  font-weight: 500;
+  font-size: 13;
+  margin-top: -30px; /*БОРЮСЬ С GAP of FORM CONTAINER */
+  margin-bottom: 30px;
+  text-decoration: none;
+}
+
+/* CSS FOR ERRORS */
+.main-containerErr {
+  height: 100vh;
+  position: relative;
+}
+
+.form-containerErr {
+  text-align: center;
+  margin: 0 auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.header {
+  font-size: 40px;
+  font-weight: 700;
+}
+
+.linkBack {
+  text-decoration: none;
+}

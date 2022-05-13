@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="form-container">
+        <h2 class="form-header">Регистрация</h2>
+        <div class="content">
+          <input id="email" type="text" placeholder="email" />
+          <span id="invalidEmail" hidden>invalidEmail</span>
+        </div>
+        <div class="content">
+          <input id="login" type="text" placeholder="Логин" />
+          <span id="invalidLogin" hidden>invalidLogin</span>
+        </div>
+        <div class="content">
+          <input id="name" type="text" placeholder="Имя" />
+          <span id="invalidName" hidden>invalidName</span>
+        </div>
+        <div class="content">
+          <input id="surname" type="text" placeholder="Фамилия" />
+          <span id="invalidSurname" hidden>invalidSurname</span>
+        </div>
+        <div class="content">
+          <input id="phoneNum" type="number" placeholder="Телефон" />
+          <span id="invalidPhoneNum" hidden>invalidPhoneNumber</span>
+        </div>
+        <div class="content">
+          <input id="password" type="number" placeholder="Пароль" />
+          <span id="invalidPass" hidden>invalidPassword</span>
+        </div>
+        <div class="content">
+          <input
+            id="retryPassword"
+            type="number"
+            placeholder="Повторите пароль"
+          />
+          <span id="passwordsNotMatch" hidden>Passwords don't match</span>
+        </div>
+        <button class="regBtn" type="submit">Регистрация</button>
+      </div>
+    </div>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
