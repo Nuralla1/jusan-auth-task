@@ -9,19 +9,19 @@
   </head>
   <body>
     <div class="main-container">
-      <div class="form-container">
+      <form class="form-container">
         <h2 class="form-header">Логин</h2>
         <div class="content">
           <input id="loginLog" type="text" placeholder="Логин" />
-          <span id="invalidLoginLog" hidden>invalidLogin</span>
+          <span id="invalidLoginLog" hidden></span>
         </div>
         <div class="content">
-          <input id="passwordLog" type="text" placeholder="Пароль" />
-          <span id="invalidPassLog" hidden>invalidPassword</span>
+          <input id="passwordLog" type="password" placeholder="Пароль" />
+          <span id="invalidPassLog" hidden></span>
         </div>
-        <button class="signInBtn" type="submit">Войти</button>
+        <button class="signInBtn" type="button">Войти</button>
         <a class="linkReg" href="./regPage.html">Нет аккаунта? Регистрация</a>
-      </div>
+      </form>
     </div>
     <script src="./js/app.js"></script>
   </body>
