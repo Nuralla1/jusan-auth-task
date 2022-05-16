@@ -23,16 +23,8 @@ const invalidLoginLog = document.getElementById("invalidLoginLog");
 const invalidPassLog = document.getElementById("invalidPassLog");
 
 if (regBtn) {
-  regBtn.addEventListener("click", () => {
-    const info = {};
-    info.email = email.value;
-    info.login = login.value;
-    info.firstName = myName.value;
-    info.surname = surname.value;
-    info.phoneNum = phoneNum.value;
-    info.password = password.value;
-    info.repeatPassword = repeatPassword.value;
-    console.log(info);
+  regBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     checkEmail(email.value);
     checkLogin(invalidLogin, login.value);
     checkName(myName.value);
@@ -40,6 +32,25 @@ if (regBtn) {
     checkPhoneNum(phoneNum.value);
     checkPassword(invalidPass, password.value);
     checkPasswordMatch(repeatPassword.value);
+    if (
+      checkEmail(email.value) &&
+      checkLogin(invalidLogin, login.value) &&
+      checkName(myName.value) &&
+      checkSurname(surname.value) &&
+      checkPhoneNum(phoneNum.value) &&
+      checkPassword(invalidPass, password.value) &&
+      checkPasswordMatch(repeatPassword.value)
+    ) {
+      const info = {};
+      info.email = email.value;
+      info.login = login.value;
+      info.firstName = myName.value;
+      info.surname = surname.value;
+      info.phoneNum = phoneNum.value;
+      info.password = password.value;
+      info.repeatPassword = repeatPassword.value;
+      console.log(info);
+    }
     login.value = "";
     email.value = "";
     myName.value = "";
@@ -110,7 +121,8 @@ if (
 }
 
 if (signInBtn) {
-  signInBtn.addEventListener("click", () => {
+  signInBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     const info = {};
     info.login = loginLog.value;
     info.password = passwordLog.value;
