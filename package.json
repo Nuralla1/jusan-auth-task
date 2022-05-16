@@ -11,14 +11,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Nuralla1/jusan-auth-task.git"
+    "url": "git+https://github.com/singularity-camp/fe-2-project-auth-Nuralla1"
   },
   "author": "Nuralla1",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Nuralla1/jusan-auth-task/issues"
-  },
-  "homepage": "https://github.com/Nuralla1/jusan-auth-task#readme",
   "devDependencies": {
     "eslint": "^8.15.0",
     "parcel": "^2.5.0",
