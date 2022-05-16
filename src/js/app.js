@@ -123,12 +123,19 @@ if (
 if (signInBtn) {
   signInBtn.addEventListener("click", (e) => {
     e.preventDefault();
-    const info = {};
-    info.login = loginLog.value;
-    info.password = passwordLog.value;
-    console.log(info);
     checkLogin(invalidLoginLog, loginLog.value);
     checkPassword(invalidPassLog, passwordLog.value);
+    if (
+      checkLogin(invalidLoginLog, loginLog.value) &&
+      checkPassword(invalidPassLog, passwordLog.value)
+    ) {
+      const info = {};
+      info.login = loginLog.value;
+      info.password = passwordLog.value;
+      console.log(info);
+    }
+    loginLog.value = "";
+    passwordLog.value = "";
   });
 }
 
