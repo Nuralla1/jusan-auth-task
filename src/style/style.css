@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 * {
   box-sizing: border-box;
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto, sans-serif;
 }
 
 .main-container {
@@ -84,7 +85,7 @@
 .linkReg {
   font-weight: 500;
   font-size: 13;
-  margin-top: -30px; /*БОРЮСЬ С GAP of FORM CONTAINER */
+  margin-top: -30px; /* БОРЮСЬ С GAP of FORM CONTAINER */
   margin-bottom: 30px;
   text-decoration: none;
 }

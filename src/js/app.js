@@ -288,7 +288,8 @@ function checkPasswordMatch(value) {
   }
 }
 
-// if (regBtn) {                                         ZAGOTOVKA ESLI NADO BUDET SDELAT' BTN DISABLED PRI NEPRAVIL'NIH DANNYH (NE ZABUD' SDELAT' BTN DISABLED)
+//                                       ZAGOTOVKA ESLI NADO BUDET SDELAT' BTN DISABLED PRI NEPRAVIL'NIH DANNYH (NE ZABUD' SDELAT' BTN DISABLED)
+// if (regBtn) {
 //   window.addEventListener("click", () => {
 //     everythingIsCorrectRegPage();
 //   });
