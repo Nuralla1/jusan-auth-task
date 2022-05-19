@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="./style/style.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <form class="form-container">
+        <h2 class="form-header">Регистрация</h2>
+        <div class="content">
+          <input id="email" type="text" placeholder="email" />
+          <span id="invalidEmail" hidden></span>
+        </div>
+        <div class="content">
+          <input id="login" type="text" placeholder="Логин" />
+          <span id="invalidLogin" hidden></span>
+        </div>
+        <div class="content">
+          <input id="name" type="text" placeholder="Имя" />
+          <span id="invalidName" hidden></span>
+        </div>
+        <div class="content">
+          <input id="surname" type="text" placeholder="Фамилия" />
+          <span id="invalidSurname" hidden></span>
+        </div>
+        <div class="content">
+          <input id="phoneNum" type="text" placeholder="Телефон" />
+          <span id="invalidPhoneNum" hidden></span>
+        </div>
+        <div class="content">
+          <input id="password" type="password" placeholder="Пароль" />
+          <span id="invalidPass" hidden></span>
+        </div>
+        <div class="content">
+          <input
+            id="retryPassword"
+            type="password"
+            placeholder="Повторите пароль"
+          />
+          <span id="passNotMatch" hidden></span>
+        </div>
+        <button class="regBtn" type="submit">Регистрация</button>
+      </form>
+    </div>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
