@@ -1,0 +1,24 @@
+{
+  "name": "task-2",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel ./src/index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/singularity-camp/fe-2-project-auth-Nuralla1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/singularity-camp/fe-2-project-auth-Nuralla1/issues"
+  },
+  "homepage": "https://github.com/singularity-camp/fe-2-project-auth-Nuralla1#readme",
+  "devDependencies": {
+    "eslint": "^8.15.0",
+    "parcel": "^2.5.0"
+  }
+}
