@@ -1,3 +1,5 @@
+import { Service } from "../../service/index.js";
+
 export class Login {
   render() {
     let login = document.createElement("div");
@@ -29,7 +31,7 @@ export function LogicForLoginPage() {
   const invalidLoginLog = document.getElementById("invalidLoginLog");
   const invalidPassLog = document.getElementById("invalidPassLog");
 
-  signInBtn.addEventListener("click", (e) => {
+  signInBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     checkLogin(invalidLoginLog, loginLog.value);
     checkPassword(invalidPassLog, passwordLog.value);
@@ -38,9 +40,14 @@ export function LogicForLoginPage() {
       checkPassword(invalidPassLog, passwordLog.value)
     ) {
       const info = {};
-      info.login = loginLog.value;
+      info.username = loginLog.value;
       info.password = passwordLog.value;
-      console.log(info);
+      const response = await Service.prototype.createPostRequestLog(
+        "http://10.130.19.30/api/login/access-token",
+        info
+      );
+      sessionStorage.setItem("Token", response.access_token);
+      console.log(sessionStorage.getItem("Token"));
     }
     loginLog.value = "";
     passwordLog.value = "";

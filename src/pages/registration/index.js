@@ -1,3 +1,5 @@
+import { Service } from "../../service/index.js";
+
 export class Registration {
   render() {
     let registration = document.createElement("div");
@@ -84,13 +86,18 @@ export function LogicForRegPage() {
     ) {
       const info = {};
       info.email = email.value;
-      info.login = login.value;
-      info.firstName = myName.value;
-      info.surname = surname.value;
-      info.phoneNum = phoneNum.value;
+      info.username = login.value;
+      info.first_name = myName.value;
+      info.last_name = surname.value;
+      info.telephone = phoneNum.value;
       info.password = password.value;
-      info.repeatPassword = repeatPassword.value;
-      console.log(info);
+      // info.repeatPassword = repeatPassword.value;
+      console.log(
+        Service.prototype.createPostRequestReg(
+          "http://10.130.19.30/api/register/",
+          info
+        )
+      );
     }
     login.value = "";
     email.value = "";

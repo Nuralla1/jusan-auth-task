@@ -42,6 +42,7 @@ const router = async () => {
   document
     .querySelector("#app")
     .appendChild(await matchedView.prototype.render());
+
   if (location.pathname === "/") {
     LogicForLoginPage();
   }
