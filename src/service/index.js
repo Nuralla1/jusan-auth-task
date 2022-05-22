@@ -30,4 +30,37 @@ export class Service {
 
     return await res.json();
   }
+
+  async createPostRequestAddPost(url, obj) {
+    const res = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(obj),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+      },
+    });
+    if (!res.ok) {
+      return res.statusText;
+    }
+
+    return await res.json();
+  }
+
+  async createGetRequestAddPost(url) {
+    const res = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+      },
+    });
+    if (!res.ok) {
+      return res.statusText;
+    }
+
+    return await res.json();
+  }
 }

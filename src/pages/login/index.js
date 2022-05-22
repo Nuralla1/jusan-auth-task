@@ -47,7 +47,11 @@ export function LogicForLoginPage() {
         info
       );
       sessionStorage.setItem("Token", response.access_token);
-      console.log(sessionStorage.getItem("Token"));
+      if (sessionStorage.getItem("Token")) {
+        location.pathname = "/main";
+      } else {
+        location.pathname = "/";
+      }
     }
     loginLog.value = "";
     passwordLog.value = "";

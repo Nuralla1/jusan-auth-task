@@ -2,6 +2,8 @@ import { Login, LogicForLoginPage } from "./pages/login/index.js";
 import { Error404 } from "./pages/404/index.js";
 import { Error500 } from "./pages/500/index.js";
 import { Registration, LogicForRegPage } from "./pages/registration/index.js";
+import { LogicForMainPage, MainPage } from "./pages/main/index.js";
+import { AddPost, LogicForAddPostPage } from "./pages/addPost/index.js";
 
 const routes = [
   {
@@ -19,6 +21,14 @@ const routes = [
   {
     path: "/registration",
     view: Registration,
+  },
+  {
+    path: "/main",
+    view: MainPage,
+  },
+  {
+    path: "/addpost",
+    view: AddPost,
   },
 ];
 
@@ -48,6 +58,12 @@ const router = async () => {
   }
   if (location.pathname === "/registration") {
     LogicForRegPage();
+  }
+  if (location.pathname === "/addpost") {
+    LogicForAddPostPage();
+  }
+  if (location.pathname === "/main") {
+    LogicForMainPage();
   }
 };
 

@@ -1,0 +1,71 @@
+import { Service } from "../../service";
+
+export class AddPost {
+  render() {
+    let addPostPage = document.createElement("div");
+    addPostPage.innerHTML = `
+            <div class="main-page-container">
+              <div class="header">
+                  <div class="header-logo">👍 Best MVP</div>
+                  <div class="header-rightpart">
+                      <a class="link" href="/main">🚀 Главная</a>
+                      <a class="link" href="/addpost">✅ Добавить пост</a>
+                      <a id="exit" class="link" href="/">🔴 Выход</a>
+                  </div>
+              </div>
+              <div class="title">
+                  
+                  <div class="error-status" hidden>Ошибка! Пост не может быть пустым</div>
+              </div>
+              <div class="container">
+                  <div class="post">
+                      <div class="add-post">
+                        <p>Добавить пост</p>
+                        <textarea class="add-post__text" maxlength="200"></textarea>
+                        <button class="add-post-btn">Добавить</button>
+                      </div>
+                  </div>
+              </div
+            </div>
+            <div class="footer">© 2022, Jusan Singularity</div>
+
+                `;
+    return addPostPage;
+  }
+}
+
+export function LogicForAddPostPage() {
+  const exit = document.getElementById("exit");
+  const input = document.querySelector(".add-post__text");
+  const error = document.querySelector(".error-status");
+  const addPostBtn = document.querySelector(".add-post-btn");
+
+  addPostBtn.addEventListener("click", async () => {
+    if (input.value === "") {
+      error.hidden = false;
+      setTimeout(() => (error.hidden = true), 1500);
+    } else {
+      const obj = {
+        title: "string",
+        description: input.value,
+      };
+
+      input.value = "";
+      const response = await Service.prototype.createPostRequestAddPost(
+        "http://10.130.19.30/api/items/",
+        obj
+      );
+      if (!response.description) {
+        location.pathname = "/main";
+        document.querySelector(".ok-status").hidden = false;
+      } else {
+        alert(response);
+      }
+    }
+  });
+
+  exit.addEventListener("click", () => {
+    sessionStorage.clear();
+    location.pathname = "/";
+  });
+}

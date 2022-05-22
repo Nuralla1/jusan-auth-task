@@ -66,7 +66,7 @@ export function LogicForRegPage() {
   const invalidPass = document.getElementById("invalidPass");
   const passNotMatch = document.getElementById("passNotMatch");
 
-  regBtn.addEventListener("click", (e) => {
+  regBtn.addEventListener("click", async (e) => {
     e.preventDefault();
     checkEmail(email.value);
     checkLogin(invalidLogin, login.value);
@@ -92,12 +92,15 @@ export function LogicForRegPage() {
       info.telephone = phoneNum.value;
       info.password = password.value;
       // info.repeatPassword = repeatPassword.value;
-      console.log(
-        Service.prototype.createPostRequestReg(
-          "http://10.130.19.30/api/register/",
-          info
-        )
+      const response = await Service.prototype.createPostRequestReg(
+        "http://10.130.19.30/api/register/",
+        info
       );
+      if (response.email) {
+        location.pathname = "/";
+      } else {
+        alert(response);
+      }
     }
     login.value = "";
     email.value = "";
