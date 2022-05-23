@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel ./src/index.html -p 3000",
     "build": "parcel build index.html",
-    "eslint": "eslint ./src/addPost/index.js"
+    "eslint": "eslint './src/**/*.js'",
+    "stylelint": "stylelint './src/style/*.css'"
   },
   "repository": {
     "type": "git",
@@ -20,6 +21,8 @@
   "homepage": "https://github.com/singularity-camp/fe-2-project-auth-Nuralla1#readme",
   "devDependencies": {
     "eslint": "^8.15.0",
-    "parcel": "^2.5.0"
+    "parcel": "^2.5.0",
+    "stylelint": "^14.8.3",
+    "stylelint-config-standard": "^25.0.0"
   }
 }
