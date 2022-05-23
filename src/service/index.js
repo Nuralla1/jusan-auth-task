@@ -48,15 +48,18 @@ export class Service {
     return await res.json();
   }
 
-  async createGetRequestAddPost(url) {
-    const res = await fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
-      },
-    });
+  async createGetRequestAddPost(skip, limit) {
+    const res = await fetch(
+      `http://10.130.19.30/api/items/?skip=${skip}&limit=${limit}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+        },
+      }
+    );
     if (!res.ok) {
       return res.statusText;
     }

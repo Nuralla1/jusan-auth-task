@@ -4,6 +4,7 @@ import { Error500 } from "./pages/500/index.js";
 import { Registration, LogicForRegPage } from "./pages/registration/index.js";
 import { LogicForMainPage, MainPage } from "./pages/main/index.js";
 import { AddPost, LogicForAddPostPage } from "./pages/addPost/index.js";
+import { loader } from "./pages/loading/index.js";
 
 const routes = [
   {
@@ -33,6 +34,7 @@ const routes = [
 ];
 
 const router = async () => {
+  loader();
   let isMatch = routes.map((route) => {
     return {
       route: route,

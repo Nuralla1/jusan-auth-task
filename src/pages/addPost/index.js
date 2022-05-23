@@ -22,6 +22,7 @@ export class AddPost {
                       <div class="add-post">
                         <p>Добавить пост</p>
                         <textarea class="add-post__text" maxlength="200"></textarea>
+                        <span class="length-counter">0/200</span>
                         <button class="add-post-btn">Добавить</button>
                       </div>
                   </div>
@@ -39,6 +40,7 @@ export function LogicForAddPostPage() {
   const input = document.querySelector(".add-post__text");
   const error = document.querySelector(".error-status");
   const addPostBtn = document.querySelector(".add-post-btn");
+  const counter = document.querySelector(".length-counter");
 
   addPostBtn.addEventListener("click", async () => {
     if (input.value === "") {
@@ -49,7 +51,6 @@ export function LogicForAddPostPage() {
         title: "string",
         description: input.value,
       };
-
       input.value = "";
       const response = await Service.prototype.createPostRequestAddPost(
         "http://10.130.19.30/api/items/",
@@ -63,6 +64,10 @@ export function LogicForAddPostPage() {
       }
     }
   });
+
+  input.oninput = () => {
+    counter.innerHTML = `${input.value.length}/200`;
+  };
 
   exit.addEventListener("click", () => {
     sessionStorage.clear();
