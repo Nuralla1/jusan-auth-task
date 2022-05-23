@@ -33,6 +33,9 @@ export class MainPage {
 }
 
 export async function LogicForMainPage() {
+  if (!sessionStorage.length) {
+    location.pathname = "/";
+  }
   const container = document.querySelector(".container");
   const exit = document.getElementById("exit");
   const prev = document.querySelector(".previous-btn");

@@ -211,7 +211,7 @@ body {
 
 .main-page-container .number-of-page {
   width: 30px;
-  padding: 5px 5px 5px 9px;
+  padding: 5px 5px 5px 10px;
   border-radius: 50%;
   pointer-events: none;
   border: 1px solid #797979;
