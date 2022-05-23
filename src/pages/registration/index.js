@@ -198,7 +198,7 @@ export function LogicForRegPage() {
           const msg = "Логин  должен состоять из латинских букв.";
           return showRecommendation(span, msg, false);
         }
-        if (/[!@#\$%\^\&*\)\(+=.<>?\\\/]/.test(c) || /\s/.test(c)) {
+        if (/[!@#$%^&*)(+=.<>?\\/]/.test(c) || /\s/.test(c)) {
           const msg =
             "Логин не должен содержать пробелов и спецсимволов, кроме нижнего подчеркивания и дефиса.";
           return showRecommendation(span, msg, false);
@@ -222,7 +222,7 @@ export function LogicForRegPage() {
           const msg = "Имя не должно содержать цифр и пробелов.";
           return showRecommendation(invalidName, msg, false);
         }
-        if (/[!@#\$%\^\&*\)\(+=._<>\\\/?]/.test(c)) {
+        if (/[!@#$%^&*)(+=._<>\\/?]/.test(c)) {
           const msg = "Имя не должно содержать cпецсимволов, кроме дефиса.";
           return showRecommendation(invalidName, msg, false);
         }
@@ -245,7 +245,7 @@ export function LogicForRegPage() {
           const msg = "Фамилия не должна содержать цифр и пробелов.";
           return showRecommendation(invalidSurname, msg, false);
         }
-        if (/[!@#\$%\^\&*\)\(+=._<>\\\/?]/.test(c)) {
+        if (/[!@#$%^&*)(+=._<>\\/?]/.test(c)) {
           const msg = "Фамилия не должна содержать cпецсимволов, кроме дефиса.";
           return showRecommendation(invalidSurname, msg, false);
         }
@@ -256,7 +256,7 @@ export function LogicForRegPage() {
   }
 
   function checkPhoneNum(value) {
-    const phoneNumRegx = /^([\+]?[\d]){8,15}$/;
+    const phoneNumRegx = /^([+]?[\d]){8,15}$/;
 
     if (!phoneNumRegx.test(value)) {
       if (value.length < 8) {
@@ -277,8 +277,7 @@ export function LogicForRegPage() {
   }
 
   function checkPassword(span, value) {
-    const passwordRegx =
-      /^(?=.*?[0-9])(?=.*?[!@#\$%\^\&*\)\(+?=._<>\\\/]).{8,30}$/i;
+    const passwordRegx = /^(?=.*?[0-9])(?=.*?[!@#$%^&*)(+?=._<>\\/]).{8,30}$/i;
 
     if (!passwordRegx.test(value)) {
       if (value.length < 8) {

@@ -98,7 +98,7 @@ export function LogicForLoginPage() {
           const msg = "Логин  должен состоять из латинских букв.";
           return showRecommendation(span, msg, false);
         }
-        if (/[!@#\$%\^\&*\)\(+=.<>?\\\/]/.test(c) || /\s/.test(c)) {
+        if (/[!@#$%^&*)(+=.<>?\\/]/.test(c) || /\s/.test(c)) {
           const msg =
             "Логин не должен содержать пробелов и спецсимволов, кроме нижнего подчеркивания и дефиса.";
           return showRecommendation(span, msg, false);
@@ -110,8 +110,7 @@ export function LogicForLoginPage() {
   }
 
   function checkPassword(span, value) {
-    const passwordRegx =
-      /^(?=.*?[0-9])(?=.*?[!@#\$%\^\&*\)\(+?=._<>\\\/]).{8,30}$/i;
+    const passwordRegx = /^(?=.*?[0-9])(?=.*?[!@#$%^&*)(+?=._<>\\/]).{8,30}$/i;
 
     if (!passwordRegx.test(value)) {
       if (value.length < 8) {
