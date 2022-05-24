@@ -44,7 +44,7 @@ const router = async () => {
   let match = isMatch.find((route) => route.isMatch);
 
   if (!match) {
-    let match = {
+    match = {
       route: routes[0],
       isMatch: true,
     };

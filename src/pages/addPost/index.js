@@ -36,6 +36,9 @@ export class AddPost {
 }
 
 export function LogicForAddPostPage() {
+  if (sessionStorage.getItem("Token") == "undefined") {
+    location.pathname = "/";
+  }
   const exit = document.getElementById("exit");
   const input = document.querySelector(".add-post__text");
   const error = document.querySelector(".error-status");

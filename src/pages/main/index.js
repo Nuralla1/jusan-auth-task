@@ -33,7 +33,7 @@ export class MainPage {
 }
 
 export async function LogicForMainPage() {
-  if (!sessionStorage.length) {
+  if (sessionStorage.getItem("Token") == "undefined") {
     location.pathname = "/";
   }
   const container = document.querySelector(".container");

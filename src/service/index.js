@@ -27,7 +27,6 @@ export class Service {
     if (!res.ok) {
       return res.statusText;
     }
-
     return await res.json();
   }
 

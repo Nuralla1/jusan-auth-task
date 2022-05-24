@@ -47,10 +47,10 @@ export function LogicForLoginPage() {
         info
       );
       sessionStorage.setItem("Token", response.access_token);
-      if (sessionStorage.getItem("Token")) {
-        location.pathname = "/main";
+      if (sessionStorage.getItem("Token") == "undefined") {
+        alert("IDI DOMOI");
       } else {
-        location.pathname = "/";
+        location.pathname = "/main";
       }
     }
     loginLog.value = "";
