@@ -35,8 +35,8 @@ export class AddPost {
   }
 }
 
-export function LogicForAddPostPage() {
-  if (sessionStorage.getItem("Token") == "undefined") {
+export function loadAddPostPage() {
+  if (!sessionStorage.length) {
     location.pathname = "/";
   }
   const exit = document.getElementById("exit");
@@ -55,11 +55,12 @@ export function LogicForAddPostPage() {
         description: input.value,
       };
       input.value = "";
-      const response = await Service.prototype.createPostRequestAddPost(
+      counter.innerHTML = `${input.value.length}/200`;
+      const response = await Service.prototype.createItem(
         "http://10.130.19.30/api/items/",
         obj
       );
-      if (!response.description) {
+      if (response.description != "undefined") {
         location.pathname = "/main";
         document.querySelector(".ok-status").hidden = false;
       } else {

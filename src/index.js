@@ -1,9 +1,9 @@
-import { Login, LogicForLoginPage } from "./pages/login/index.js";
+import { Login, loadLoginPage } from "./pages/login/index.js";
 import { Error404 } from "./pages/404/index.js";
 import { Error500 } from "./pages/500/index.js";
-import { Registration, LogicForRegPage } from "./pages/registration/index.js";
-import { LogicForMainPage, MainPage } from "./pages/main/index.js";
-import { AddPost, LogicForAddPostPage } from "./pages/addPost/index.js";
+import { Registration, loadRegPage } from "./pages/registration/index.js";
+import { loadMainPage, MainPage } from "./pages/main/index.js";
+import { AddPost, loadAddPostPage } from "./pages/addPost/index.js";
 import { loader } from "./pages/loading/index.js";
 
 const routes = [
@@ -56,16 +56,16 @@ const router = async () => {
     .appendChild(await matchedView.prototype.render());
 
   if (location.pathname === "/") {
-    LogicForLoginPage();
+    loadLoginPage();
   }
   if (location.pathname === "/registration") {
-    LogicForRegPage();
+    loadRegPage();
   }
   if (location.pathname === "/addpost") {
-    LogicForAddPostPage();
+    loadAddPostPage();
   }
   if (location.pathname === "/main") {
-    LogicForMainPage();
+    loadMainPage();
   }
 };
 

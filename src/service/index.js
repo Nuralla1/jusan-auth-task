@@ -1,5 +1,5 @@
 export class Service {
-  async createPostRequestReg(url, obj) {
+  async registrateUser(url, obj) {
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(obj),
@@ -15,7 +15,7 @@ export class Service {
     return await res.json();
   }
 
-  async createPostRequestLog(url, obj) {
+  async signInUser(url, obj) {
     const res = await fetch(url, {
       method: "POST",
       body: new URLSearchParams(obj),
@@ -27,10 +27,11 @@ export class Service {
     if (!res.ok) {
       return res.statusText;
     }
-    return await res.json();
+    const resJson = await res.json();
+    sessionStorage.setItem("Token", resJson.access_token);
   }
 
-  async createPostRequestAddPost(url, obj) {
+  async createItem(url, obj) {
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(obj),
@@ -47,7 +48,7 @@ export class Service {
     return await res.json();
   }
 
-  async createGetRequestAddPost(skip, limit) {
+  async getItems(skip, limit) {
     const res = await fetch(
       `http://10.130.19.30/api/items/?skip=${skip}&limit=${limit}`,
       {

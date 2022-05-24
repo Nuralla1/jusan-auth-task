@@ -47,7 +47,10 @@ export class Registration {
   }
 }
 
-export function LogicForRegPage() {
+export function loadRegPage() {
+  if (sessionStorage.length) {
+    location.pathname = "/main";
+  }
   const regBtn = document.querySelector(".regBtn");
 
   const email = document.getElementById("email");
@@ -91,8 +94,7 @@ export function LogicForRegPage() {
       info.last_name = surname.value;
       info.telephone = phoneNum.value;
       info.password = password.value;
-      // info.repeatPassword = repeatPassword.value;
-      const response = await Service.prototype.createPostRequestReg(
+      const response = await Service.prototype.registrateUser(
         "http://10.130.19.30/api/register/",
         info
       );

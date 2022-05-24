@@ -24,7 +24,10 @@ export class Login {
   }
 }
 
-export function LogicForLoginPage() {
+export function loadLoginPage() {
+  if (sessionStorage.length) {
+    location.pathname = "/main";
+  }
   const signInBtn = document.querySelector(".signInBtn");
   const loginLog = document.getElementById("loginLog");
   const passwordLog = document.getElementById("passwordLog");
@@ -42,15 +45,14 @@ export function LogicForLoginPage() {
       const info = {};
       info.username = loginLog.value;
       info.password = passwordLog.value;
-      const response = await Service.prototype.createPostRequestLog(
+      await Service.prototype.signInUser(
         "http://10.130.19.30/api/login/access-token",
         info
       );
-      sessionStorage.setItem("Token", response.access_token);
-      if (sessionStorage.getItem("Token") == "undefined") {
-        alert("IDI DOMOI");
-      } else {
+      if (sessionStorage.length) {
         location.pathname = "/main";
+      } else {
+        alert("IDI DOMOI");
       }
     }
     loginLog.value = "";

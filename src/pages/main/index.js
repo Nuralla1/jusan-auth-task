@@ -32,8 +32,8 @@ export class MainPage {
   }
 }
 
-export async function LogicForMainPage() {
-  if (sessionStorage.getItem("Token") == "undefined") {
+export async function loadMainPage() {
+  if (!sessionStorage.length) {
     location.pathname = "/";
   }
   const container = document.querySelector(".container");
@@ -46,12 +46,12 @@ export async function LogicForMainPage() {
   let skip = 0;
   let page = 1;
 
-  let response = await Service.prototype.createGetRequestAddPost(skip, LIMIT);
+  let response = await Service.prototype.getItems(skip, LIMIT);
   renderPosts(response);
   pageInput.value = page;
   prev.disabled = true;
 
-  let data = await Service.prototype.createGetRequestAddPost(0, 1000);
+  let data = await Service.prototype.getItems(0, 1000);
   const possibleNumOfPages = Math.ceil(data.length / LIMIT);
 
   next.addEventListener("click", async () => {
@@ -59,7 +59,7 @@ export async function LogicForMainPage() {
     pageInput.value = page;
     skip += LIMIT;
     container.innerHTML = "";
-    let response = await Service.prototype.createGetRequestAddPost(skip, LIMIT);
+    let response = await Service.prototype.getItems(skip, LIMIT);
     if (page !== possibleNumOfPages) {
       renderPosts(response);
       prev.disabled = false;
@@ -75,7 +75,7 @@ export async function LogicForMainPage() {
     pageInput.value = page;
     skip -= LIMIT;
     container.innerHTML = "";
-    let response = await Service.prototype.createGetRequestAddPost(skip, LIMIT);
+    let response = await Service.prototype.getItems(skip, LIMIT);
     if (page === 1) {
       renderPosts(response);
       prev.disabled = true;
