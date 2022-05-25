@@ -42,19 +42,21 @@ export function loadLoginPage() {
       checkLogin(invalidLoginLog, loginLog.value) &&
       checkPassword(invalidPassLog, passwordLog.value)
     ) {
+      document.querySelector(".load-back-ground").hidden = false;
       const info = {};
       info.username = loginLog.value;
       info.password = passwordLog.value;
-      await Service.prototype.signInUser(
+      const res = await Service.prototype.signInUser(
         "http://10.130.19.30/api/login/access-token",
         info
       );
       if (sessionStorage.length) {
         location.pathname = "/main";
       } else {
-        alert("IDI DOMOI");
+        alert(res);
       }
     }
+    document.querySelector(".load-back-ground").hidden = true;
     loginLog.value = "";
     passwordLog.value = "";
   });

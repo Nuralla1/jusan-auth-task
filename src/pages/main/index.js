@@ -55,6 +55,7 @@ export async function loadMainPage() {
   const possibleNumOfPages = Math.ceil(data.length / LIMIT);
 
   next.addEventListener("click", async () => {
+    document.querySelector(".load-back-ground").hidden = false;
     page += 1;
     pageInput.value = page;
     skip += LIMIT;
@@ -63,13 +64,16 @@ export async function loadMainPage() {
     if (page !== possibleNumOfPages) {
       renderPosts(response);
       prev.disabled = false;
+      document.querySelector(".load-back-ground").hidden = true;
     } else {
       renderPosts(response);
       next.disabled = true;
+      document.querySelector(".load-back-ground").hidden = true;
     }
   });
 
   prev.addEventListener("click", async () => {
+    document.querySelector(".load-back-ground").hidden = false;
     next.disabled = false;
     page -= 1;
     pageInput.value = page;
@@ -79,8 +83,10 @@ export async function loadMainPage() {
     if (page === 1) {
       renderPosts(response);
       prev.disabled = true;
+      document.querySelector(".load-back-ground").hidden = true;
     } else {
       renderPosts(response);
+      document.querySelector(".load-back-ground").hidden = true;
     }
   });
 

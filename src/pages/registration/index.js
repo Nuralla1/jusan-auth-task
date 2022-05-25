@@ -87,6 +87,7 @@ export function loadRegPage() {
       checkPassword(invalidPass, password.value) &&
       checkPasswordMatch(repeatPassword.value)
     ) {
+      document.querySelector(".load-back-ground").hidden = false;
       const info = {};
       info.email = email.value;
       info.username = login.value;
@@ -98,12 +99,14 @@ export function loadRegPage() {
         "http://10.130.19.30/api/register/",
         info
       );
+      document.querySelector(".load-back-ground").hidden = true;
       if (response.email) {
         location.pathname = "/";
       } else {
         alert(response);
       }
     }
+    document.querySelector(".load-back-ground").hidden = true;
     login.value = "";
     email.value = "";
     myName.value = "";
