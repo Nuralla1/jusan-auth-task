@@ -1,24 +1,28 @@
 {
-  "name": "auth",
+  "name": "task-2",
   "version": "1.0.0",
-  "description": "look README.md",
+  "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel src/*.html -p 3000",
-    "build": "parcel build src/*.html",
-    "stylelint": "stylelint 'src/style/**.css'",
-    "eslint": "eslint src/js/**.js"
+    "start": "parcel ./src/index.html -p 3000",
+    "build": "parcel build index.html",
+    "eslint": "eslint './src/**/*.js'",
+    "stylelint": "stylelint './src/style/*.css'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/singularity-camp/fe-2-project-auth-Nuralla1"
+    "url": "git+https://github.com/singularity-camp/fe-2-project-auth-Nuralla1.git"
   },
-  "author": "Nuralla1",
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/singularity-camp/fe-2-project-auth-Nuralla1/issues"
+  },
+  "homepage": "https://github.com/singularity-camp/fe-2-project-auth-Nuralla1#readme",
   "devDependencies": {
     "eslint": "^8.15.0",
     "parcel": "^2.5.0",
-    "stylelint": "^14.8.2",
+    "stylelint": "^14.8.3",
     "stylelint-config-standard": "^25.0.0"
   }
 }
