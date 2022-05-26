@@ -6,7 +6,12 @@ import { loadMainPage, MainPage } from "./pages/main/index";
 import { AddPost, loadAddPostPage } from "./pages/addPost/index";
 import { Profile, loadProfilePage } from "./pages/profile";
 
-const routes = [
+type Route = {
+  path: string;
+  view: any;
+};
+
+const routes: Route[] = [
   {
     path: "/404",
     view: Error404,
@@ -55,7 +60,7 @@ const router = async () => {
   let matchedView = match.route.view;
 
   document
-    .querySelector("#app")
+    .querySelector("#app")!
     .appendChild(await matchedView.prototype.render());
 
   if (location.pathname === "/") {

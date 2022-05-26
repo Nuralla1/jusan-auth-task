@@ -37,28 +37,32 @@ export async function loadMainPage() {
   if (!sessionStorage.length) {
     location.pathname = "/";
   }
-  const container = document.querySelector(".container");
-  const exit = document.getElementById("exit");
-  const prev = document.querySelector(".previous-btn");
-  const next = document.querySelector(".next-btn");
-  const pageInput = document.querySelector(".number-of-page");
+  const loader = document.querySelector(".load-back-ground") as HTMLDivElement;
+  const container = document.querySelector(".container") as HTMLDivElement;
+  const exit = document.getElementById("exit") as HTMLElement;
+  const prev = document.querySelector(".previous-btn") as HTMLButtonElement;
+  const next = document.querySelector(".next-btn") as HTMLButtonElement;
+  const pageInput = document.querySelector(
+    ".number-of-page"
+  ) as HTMLInputElement;
 
-  const LIMIT = 3;
-  let skip = 0;
-  let page = 1;
+  const LIMIT: number = 3;
+  let skip: number = 0;
+  let page: number = 1;
 
-  let response = await Service.prototype.getItems(skip, LIMIT);
+  let response: object[] = await Service.prototype.getItems(skip, LIMIT);
+  console.log(response);
   renderPosts(response);
-  pageInput.value = page;
+  pageInput.value = page.toString();
   prev.disabled = true;
 
   let data = await Service.prototype.getItems(0, 1000);
   const possibleNumOfPages = Math.ceil(data.length / LIMIT);
 
   next.addEventListener("click", async () => {
-    document.querySelector(".load-back-ground").hidden = false;
+    loader.hidden = false;
     page += 1;
-    pageInput.value = page;
+    pageInput.value = page.toString();
     prev.disabled = false;
     skip += LIMIT;
     container.innerHTML = "";
@@ -66,29 +70,29 @@ export async function loadMainPage() {
     if (page !== possibleNumOfPages) {
       renderPosts(response);
       prev.disabled = false;
-      document.querySelector(".load-back-ground").hidden = true;
+      loader.hidden = true;
     } else {
       renderPosts(response);
       next.disabled = true;
-      document.querySelector(".load-back-ground").hidden = true;
+      loader.hidden = true;
     }
   });
 
   prev.addEventListener("click", async () => {
-    document.querySelector(".load-back-ground").hidden = false;
+    loader.hidden = false;
     next.disabled = false;
     page -= 1;
-    pageInput.value = page;
+    pageInput.value = page.toString();
     skip -= LIMIT;
     container.innerHTML = "";
     let response = await Service.prototype.getItems(skip, LIMIT);
     if (page === 1) {
       renderPosts(response);
       prev.disabled = true;
-      document.querySelector(".load-back-ground").hidden = true;
+      loader.hidden = true;
     } else {
       renderPosts(response);
-      document.querySelector(".load-back-ground").hidden = true;
+      loader.hidden = true;
     }
   });
 
@@ -97,7 +101,7 @@ export async function loadMainPage() {
     location.pathname = "/";
   });
 
-  function renderPosts(array) {
+  function renderPosts(array: any[]) {
     for (let elem of array) {
       const post = document.createElement("div");
       const postInfo = document.createElement("div");

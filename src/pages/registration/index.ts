@@ -51,23 +51,36 @@ export function loadRegPage() {
   if (sessionStorage.length) {
     location.pathname = "/main";
   }
-  const regBtn = document.querySelector(".regBtn");
+  const loader = document.querySelector(".load-back-ground") as HTMLDivElement;
+  const regBtn = document.querySelector(".regBtn") as HTMLButtonElement;
 
-  const email = document.getElementById("email");
-  const login = document.getElementById("login");
-  const myName = document.getElementById("name");
-  const surname = document.getElementById("surname");
-  const phoneNum = document.getElementById("phoneNum");
-  const password = document.getElementById("password");
-  const repeatPassword = document.getElementById("retryPassword");
+  const email = document.getElementById("email") as HTMLInputElement;
+  const login = document.getElementById("login") as HTMLInputElement;
+  const myName = document.getElementById("name") as HTMLInputElement;
+  const surname = document.getElementById("surname") as HTMLInputElement;
+  const phoneNum = document.getElementById("phoneNum") as HTMLInputElement;
+  const password = document.getElementById("password") as HTMLInputElement;
+  const repeatPassword = document.getElementById(
+    "retryPassword"
+  ) as HTMLInputElement;
 
-  const invalidEmail = document.getElementById("invalidEmail");
-  const invalidLogin = document.getElementById("invalidLogin");
-  const invalidName = document.getElementById("invalidName");
-  const invalidSurname = document.getElementById("invalidSurname");
-  const invalidPhoneNum = document.getElementById("invalidPhoneNum");
-  const invalidPass = document.getElementById("invalidPass");
-  const passNotMatch = document.getElementById("passNotMatch");
+  const invalidEmail = document.getElementById(
+    "invalidEmail"
+  ) as HTMLSpanElement;
+  const invalidLogin = document.getElementById(
+    "invalidLogin"
+  ) as HTMLSpanElement;
+  const invalidName = document.getElementById("invalidName") as HTMLSpanElement;
+  const invalidSurname = document.getElementById(
+    "invalidSurname"
+  ) as HTMLSpanElement;
+  const invalidPhoneNum = document.getElementById(
+    "invalidPhoneNum"
+  ) as HTMLSpanElement;
+  const invalidPass = document.getElementById("invalidPass") as HTMLSpanElement;
+  const passNotMatch = document.getElementById(
+    "passNotMatch"
+  ) as HTMLSpanElement;
 
   regBtn.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -87,8 +100,16 @@ export function loadRegPage() {
       checkPassword(invalidPass, password.value) &&
       checkPasswordMatch(repeatPassword.value)
     ) {
-      document.querySelector(".load-back-ground").hidden = false;
-      const info = {};
+      loader.hidden = false;
+      interface Info {
+        email: string;
+        username: string;
+        first_name: string;
+        last_name: string;
+        telephone: string;
+        password: string;
+      }
+      const info = {} as Info;
       info.email = email.value;
       info.username = login.value;
       info.first_name = myName.value;
@@ -99,14 +120,14 @@ export function loadRegPage() {
         "http://10.130.19.30/api/register/",
         info
       );
-      document.querySelector(".load-back-ground").hidden = true;
+      loader.hidden = true;
       if (response.email) {
         location.pathname = "/";
       } else {
         alert(response);
       }
     }
-    document.querySelector(".load-back-ground").hidden = true;
+    loader.hidden = true;
     login.value = "";
     email.value = "";
     myName.value = "";
@@ -164,13 +185,17 @@ export function loadRegPage() {
     checkPasswordMatch(repeatPassword.value);
   });
 
-  function showRecommendation(span, recommendMsg, hiddenResult) {
+  function showRecommendation(
+    span: HTMLElement,
+    recommendMsg: string,
+    hiddenResult: boolean
+  ) {
     span.textContent = recommendMsg;
     span.hidden = hiddenResult;
     return hiddenResult;
   }
 
-  function checkEmail(value) {
+  function checkEmail(value: string) {
     const emailRegx =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -182,7 +207,7 @@ export function loadRegPage() {
     }
   }
 
-  function checkLogin(span, value) {
+  function checkLogin(span: HTMLElement, value: string) {
     const loginRegx = /(?!^\d+$)^[-\w]{3,15}$/i;
 
     if (!loginRegx.test(value)) {
@@ -214,7 +239,7 @@ export function loadRegPage() {
     }
   }
 
-  function checkName(value) {
+  function checkName(value: string) {
     const nameRegx = /^[a-z-а-я]+$/i;
 
     if (!nameRegx.test(value)) {
@@ -237,7 +262,7 @@ export function loadRegPage() {
     }
   }
 
-  function checkSurname(value) {
+  function checkSurname(value: string) {
     const nameRegx = /^[a-z-а-я]+$/i;
 
     if (!nameRegx.test(value)) {
@@ -260,7 +285,7 @@ export function loadRegPage() {
     }
   }
 
-  function checkPhoneNum(value) {
+  function checkPhoneNum(value: string) {
     const phoneNumRegx = /^([+]?[\d]){8,15}$/;
 
     if (!phoneNumRegx.test(value)) {
@@ -281,7 +306,7 @@ export function loadRegPage() {
     }
   }
 
-  function checkPassword(span, value) {
+  function checkPassword(span: HTMLElement, value: string) {
     const passwordRegx = /^(?=.*?[0-9])(?=.*?[!@#$%^&*)(+?=._<>\\/]).{8,30}$/i;
 
     if (!passwordRegx.test(value)) {
@@ -302,7 +327,7 @@ export function loadRegPage() {
     }
   }
 
-  function checkPasswordMatch(value) {
+  function checkPasswordMatch(value: string) {
     if (value === "") {
       const msg = "Поле не должно быть пустым.";
       return showRecommendation(passNotMatch, msg, false);

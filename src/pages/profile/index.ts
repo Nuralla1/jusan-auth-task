@@ -61,8 +61,9 @@ export class Profile {
 }
 
 export async function loadProfilePage() {
-  const saveBtn = document.querySelector(".save-btn");
-  const status = document.querySelector("#status");
+  const loader = document.querySelector(".load-back-ground") as HTMLDivElement;
+  const saveBtn = document.querySelector(".save-btn") as HTMLButtonElement;
+  const status = document.querySelector("#status") as HTMLDivElement;
 
   const email = document.querySelector(".email") as HTMLInputElement;
   const myName = document.querySelector(".name") as HTMLInputElement;
@@ -71,21 +72,31 @@ export async function loadProfilePage() {
   const phoneNum = document.querySelector(".phoneNum") as HTMLInputElement;
   const password = document.querySelector(".password") as HTMLInputElement;
 
-  const invalidEmail = document.getElementById("invalidEmail");
-  const invalidLogin = document.getElementById("invalidLogin");
-  const invalidName = document.getElementById("invalidName");
-  const invalidSurname = document.getElementById("invalidSurname");
-  const invalidPhoneNum = document.getElementById("invalidPhoneNum");
-  const invalidPassword = document.getElementById("invalidPassword");
+  const invalidEmail = document.getElementById(
+    "invalidEmail"
+  ) as HTMLSpanElement;
+  const invalidLogin = document.getElementById(
+    "invalidLogin"
+  ) as HTMLSpanElement;
+  const invalidName = document.getElementById("invalidName") as HTMLSpanElement;
+  const invalidSurname = document.getElementById(
+    "invalidSurname"
+  ) as HTMLSpanElement;
+  const invalidPhoneNum = document.getElementById(
+    "invalidPhoneNum"
+  ) as HTMLSpanElement;
+  const invalidPass = document.getElementById(
+    "invalidPassword"
+  ) as HTMLSpanElement;
 
   try {
-    document.querySelector(".load-back-ground").hidden = false;
+    loader.hidden = false;
     const response = await Service.prototype.getUserData();
     if (!response.ok) {
       throw new Error(response.statusText);
     }
-    document.querySelector(".load-back-ground").hidden = true;
     const resJson = await response.json();
+    loader.hidden = true;
     email.value = resJson.email;
     myName.value = resJson.first_name;
     surname.value = resJson.last_name;
@@ -102,22 +113,24 @@ export async function loadProfilePage() {
     checkName(myName.value);
     checkSurname(surname.value);
     checkPhoneNum(phoneNum.value);
+    checkPassword(invalidPass, password.value);
     if (
       checkEmail(email.value) &&
       checkLogin(invalidLogin, login.value) &&
       checkName(myName.value) &&
       checkSurname(surname.value) &&
-      checkPhoneNum(phoneNum.value)
+      checkPhoneNum(phoneNum.value) &&
+      checkPassword(invalidPass, password.value)
     ) {
-      // interface Info {
-      //   email: string;
-      //   username: string;
-      //   first_name: string;
-      //   last_name: string;
-      //   telephone: string;
-      //   password: string;
-      // }
-      const info = {};
+      interface Info {
+        email: string;
+        username: string;
+        first_name: string;
+        last_name: string;
+        telephone: string;
+        password: string;
+      }
+      const info = {} as Info;
       info.email = email.value;
       info.username = login.value;
       info.first_name = myName.value;
@@ -125,11 +138,13 @@ export async function loadProfilePage() {
       info.telephone = phoneNum.value;
       info.password = password.value;
       try {
+        loader.hidden = false;
         const response = await Service.prototype.updateUserData(info);
         if (!response.ok) {
           throw new Error(response.statusText);
         }
         const resJson = await response.json();
+        loader.hidden = true;
         console.log(resJson);
         showOkStatus();
         setTimeout(() => (location.pathname = "/profile"), 1000);
@@ -196,13 +211,24 @@ export async function loadProfilePage() {
     checkPhoneNum(phoneNum.value);
   });
 
-  function showRecommendation(span, recommendMsg, hiddenResult) {
+  password.addEventListener("blur", () => {
+    checkPassword(invalidPass, password.value);
+  });
+  password.addEventListener("focus", () => {
+    checkPassword(invalidPass, password.value);
+  });
+
+  function showRecommendation(
+    span: HTMLElement,
+    recommendMsg: string,
+    hiddenResult: boolean
+  ) {
     span.textContent = recommendMsg;
     span.hidden = hiddenResult;
     return hiddenResult;
   }
 
-  function checkEmail(value) {
+  function checkEmail(value: string) {
     const emailRegx =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
@@ -214,7 +240,7 @@ export async function loadProfilePage() {
     }
   }
 
-  function checkLogin(span, value) {
+  function checkLogin(span: HTMLElement, value: string) {
     const loginRegx = /(?!^\d+$)^[-\w]{3,15}$/i;
 
     if (!loginRegx.test(value)) {
@@ -246,7 +272,7 @@ export async function loadProfilePage() {
     }
   }
 
-  function checkName(value) {
+  function checkName(value: string) {
     const nameRegx = /^[a-z-а-я]+$/i;
 
     if (!nameRegx.test(value)) {
@@ -269,7 +295,7 @@ export async function loadProfilePage() {
     }
   }
 
-  function checkSurname(value) {
+  function checkSurname(value: string) {
     const nameRegx = /^[a-z-а-я]+$/i;
 
     if (!nameRegx.test(value)) {
@@ -292,7 +318,7 @@ export async function loadProfilePage() {
     }
   }
 
-  function checkPhoneNum(value) {
+  function checkPhoneNum(value: string) {
     const phoneNumRegx = /^([+]?[\d]){8,15}$/;
 
     if (!phoneNumRegx.test(value)) {
@@ -310,6 +336,27 @@ export async function loadProfilePage() {
       }
     } else {
       return showRecommendation(invalidPhoneNum, "", true);
+    }
+  }
+
+  function checkPassword(span: HTMLElement, value: string) {
+    const passwordRegx = /^(?=.*?[0-9])(?=.*?[!@#$%^&*)(+?=._<>\\/]).{8,30}$/i;
+
+    if (!passwordRegx.test(value)) {
+      if (value.length < 8) {
+        const msg = "Пароль не должен быть короче 8 символов.";
+        return showRecommendation(span, msg, false);
+      }
+      if (value.length > 30) {
+        const msg = "Пароль не должен быть длиннее 30 символов.";
+        return showRecommendation(span, msg, false);
+      }
+      if (true) {
+        const msg = "Пароль  должен содержать хотябы один спецсимвол и цифру.";
+        return showRecommendation(span, msg, false);
+      }
+    } else {
+      return showRecommendation(span, "", true);
     }
   }
 }

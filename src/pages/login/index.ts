@@ -28,11 +28,19 @@ export function loadLoginPage() {
   if (sessionStorage.length) {
     location.pathname = "/main";
   }
-  const signInBtn = document.querySelector(".signInBtn");
-  const loginLog = document.getElementById("loginLog");
-  const passwordLog = document.getElementById("passwordLog");
-  const invalidLoginLog = document.getElementById("invalidLoginLog");
-  const invalidPassLog = document.getElementById("invalidPassLog");
+  const loader = document.querySelector(".load-back-ground") as HTMLDivElement;
+  const signInBtn = document.querySelector(".signInBtn") as HTMLButtonElement;
+
+  const loginLog = document.getElementById("loginLog") as HTMLInputElement;
+  const passwordLog = document.getElementById(
+    "passwordLog"
+  ) as HTMLInputElement;
+  const invalidLoginLog = document.getElementById(
+    "invalidLoginLog"
+  ) as HTMLInputElement;
+  const invalidPassLog = document.getElementById(
+    "invalidPassLog"
+  ) as HTMLInputElement;
 
   signInBtn.addEventListener("click", async (e) => {
     e.preventDefault();
@@ -42,8 +50,12 @@ export function loadLoginPage() {
       checkLogin(invalidLoginLog, loginLog.value) &&
       checkPassword(invalidPassLog, passwordLog.value)
     ) {
-      document.querySelector(".load-back-ground").hidden = false;
-      const info = {};
+      loader.hidden = false;
+      interface Info {
+        username: string;
+        password: string;
+      }
+      const info = {} as Info;
       info.username = loginLog.value;
       info.password = passwordLog.value;
       const res = await Service.prototype.signInUser(
@@ -56,7 +68,7 @@ export function loadLoginPage() {
         alert(res);
       }
     }
-    document.querySelector(".load-back-ground").hidden = true;
+    loader.hidden = true;
     loginLog.value = "";
     passwordLog.value = "";
   });
@@ -75,13 +87,17 @@ export function loadLoginPage() {
     checkPassword(invalidPassLog, passwordLog.value);
   });
 
-  function showRecommendation(span, recommendMsg, hiddenResult) {
+  function showRecommendation(
+    span: HTMLElement,
+    recommendMsg: string,
+    hiddenResult: boolean
+  ) {
     span.textContent = recommendMsg;
     span.hidden = hiddenResult;
     return hiddenResult;
   }
 
-  function checkLogin(span, value) {
+  function checkLogin(span: HTMLElement, value: string) {
     const loginRegx = /(?!^\d+$)^[-\w]{3,15}$/i;
 
     if (!loginRegx.test(value)) {
@@ -113,7 +129,7 @@ export function loadLoginPage() {
     }
   }
 
-  function checkPassword(span, value) {
+  function checkPassword(span: HTMLElement, value: string) {
     const passwordRegx = /^(?=.*?[0-9])(?=.*?[!@#$%^&*)(+?=._<>\\/]).{8,30}$/i;
 
     if (!passwordRegx.test(value)) {
