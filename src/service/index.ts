@@ -66,4 +66,28 @@ export class Service {
 
     return await res.json();
   }
+
+  getUserData() {
+    const res = fetch("http://10.130.19.30/api/users/me", {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+      },
+    });
+    return res;
+  }
+
+  updateUserData(obj) {
+    const res = fetch("http://10.130.19.30/api/users/me", {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${sessionStorage.getItem("Token")}`,
+      },
+      body: JSON.stringify(obj),
+    });
+    return res;
+  }
 }

@@ -1,9 +1,10 @@
-import { Login, loadLoginPage } from "./pages/login/index.js";
-import { Error404 } from "./pages/404/index.js";
-import { Error500 } from "./pages/500/index.js";
-import { Registration, loadRegPage } from "./pages/registration/index.js";
-import { loadMainPage, MainPage } from "./pages/main/index.js";
-import { AddPost, loadAddPostPage } from "./pages/addPost/index.js";
+import { Login, loadLoginPage } from "./pages/login/index";
+import { Error404 } from "./pages/404/index";
+import { Error500 } from "./pages/500/index";
+import { Registration, loadRegPage } from "./pages/registration/index";
+import { loadMainPage, MainPage } from "./pages/main/index";
+import { AddPost, loadAddPostPage } from "./pages/addPost/index";
+import { Profile, loadProfilePage } from "./pages/profile";
 
 const routes = [
   {
@@ -29,6 +30,10 @@ const routes = [
   {
     path: "/addpost",
     view: AddPost,
+  },
+  {
+    path: "/profile",
+    view: Profile,
   },
 ];
 
@@ -64,6 +69,9 @@ const router = async () => {
   }
   if (location.pathname === "/main") {
     loadMainPage();
+  }
+  if (location.pathname === "/profile") {
+    loadProfilePage();
   }
 };
 

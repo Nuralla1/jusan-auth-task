@@ -78,7 +78,8 @@ body {
 
 /* CSS FOR LOG PAGE */
 .signInBtn,
-.add-post-btn {
+.add-post-btn,
+.save-btn {
   margin: 20px;
   width: 300px;
   height: 37px;
@@ -168,7 +169,9 @@ body {
   font-size: 13px;
   background-color: #009718;
   border-radius: 10px;
-  padding: 40px;
+  padding: 10px;
+  position: absolute;
+  right: 50px;
 }
 
 .main-page-container .container {
@@ -237,7 +240,6 @@ body {
   background-color: #e30202;
   border-radius: 10px;
   padding: 10px;
-  margin-left: auto;
   position: absolute;
   right: 50px;
 }
@@ -251,6 +253,8 @@ body {
   background-color: white;
   position: relative;
   top: -20px;
+  width: 700px;
+  height: 400px;
 }
 
 .add-post p {
@@ -258,8 +262,7 @@ body {
 }
 
 .add-post__text {
-  width: 700px;
-  padding: 10px 10px 70px;
+  padding: 10px 10px 200px;
   resize: none;
 }
 
@@ -269,8 +272,47 @@ body {
   bottom: 80px;
 }
 
-.add-post-btn {
+.add-post-btn,
+.save-btn {
   margin-left: auto;
+}
+
+/* CSS FOR Profile PAGE */
+.profile_info {
+  display: grid;
+  grid-column-gap: 20px;
+}
+
+.profile_info div:nth-child(3n + 1) {
+  grid-row: 1;
+}
+
+.profile_info div:nth-child(3n + 2) {
+  grid-row: 2;
+}
+.profile_info div:nth-child(3n + 3) {
+  grid-row: 3;
+}
+
+.profile_info input {
+  border: none;
+  padding: 10px;
+  font-size: 13px;
+  border-bottom: 0.5px solid #6991f3;
+  width: 300px;
+}
+
+.profile_info span {
+  font-size: 10px;
+  color: red;
+  font-style: italic;
+  width: 300px;
+}
+
+.profile_info input:focus {
+  border: 2px solid rgb(71 233 71);
+  border-radius: 10px;
+  outline: none;
 }
 
 /* LOADER */

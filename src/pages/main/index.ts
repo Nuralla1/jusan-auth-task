@@ -10,6 +10,7 @@ export class MainPage {
                 <div class="header-rightpart">
                     <a class="link" href="/main">🚀 Главная</a>
                     <a class="link" href="/addpost">✅ Добавить пост</a>
+                    <a class="link" href="/profile">👨‍ Мой профиль</a>
                     <a id="exit" class="link" href="/">🔴 Выход</a>
                 </div>
             </div>
@@ -58,6 +59,7 @@ export async function loadMainPage() {
     document.querySelector(".load-back-ground").hidden = false;
     page += 1;
     pageInput.value = page;
+    prev.disabled = false;
     skip += LIMIT;
     container.innerHTML = "";
     let response = await Service.prototype.getItems(skip, LIMIT);

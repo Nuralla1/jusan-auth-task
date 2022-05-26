@@ -1,4 +1,4 @@
-import { Service } from "../../service/index.js";
+import { Service } from "../../service/index";
 
 export class Registration {
   render() {

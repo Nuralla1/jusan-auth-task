@@ -10,6 +10,7 @@ export class AddPost {
                   <div class="header-rightpart">
                       <a class="link" href="/main">🚀 Главная</a>
                       <a class="link" href="/addpost">✅ Добавить пост</a>
+                      <a class="link" href="/profile">👨‍ Мой профиль</a>
                       <a id="exit" class="link" href="/">🔴 Выход</a>
                   </div>
               </div>
