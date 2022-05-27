@@ -40,18 +40,25 @@ export function loadAddPostPage() {
   if (!sessionStorage.length) {
     location.pathname = "/";
   }
-  const exit = document.getElementById("exit");
-  const input = document.querySelector(".add-post__text");
-  const error = document.querySelector(".error-status");
-  const addPostBtn = document.querySelector(".add-post-btn");
-  const counter = document.querySelector(".length-counter");
+  const exit = document.getElementById("exit") as HTMLInputElement;
+  const input = document.querySelector(".add-post__text") as HTMLInputElement;
+  const error = document.querySelector(".error-status") as HTMLDivElement;
+  const addPostBtn = document.querySelector(
+    ".add-post-btn"
+  ) as HTMLInputElement;
+  const counter = document.querySelector(".length-counter") as HTMLSpanElement;
+  const loader = document.querySelector(".load-back-ground") as HTMLDivElement;
 
   addPostBtn.addEventListener("click", async () => {
     if (input.value === "") {
       error.hidden = false;
       setTimeout(() => (error.hidden = true), 1500);
     } else {
-      const obj = {
+      loader.hidden = false;
+      const obj: {
+        title: string;
+        description: string;
+      } = {
         title: "string",
         description: input.value,
       };
@@ -61,9 +68,10 @@ export function loadAddPostPage() {
         "http://10.130.19.30/api/items/",
         obj
       );
+      loader.hidden = true;
       if (response.description != "undefined") {
         location.pathname = "/main";
-        document.querySelector(".ok-status").hidden = false;
+        // document.querySelector(".ok-status").hidden = false;
       } else {
         alert(response);
       }

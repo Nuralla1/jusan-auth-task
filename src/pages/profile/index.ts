@@ -106,7 +106,6 @@ export async function loadProfilePage() {
   } catch (error) {
     alert(error);
   }
-
   saveBtn.addEventListener("click", async () => {
     checkEmail(email.value);
     checkLogin(invalidLogin, login.value);
@@ -122,21 +121,31 @@ export async function loadProfilePage() {
       checkPhoneNum(phoneNum.value) &&
       checkPassword(invalidPass, password.value)
     ) {
-      interface Info {
+      type Info = {
         email: string;
         username: string;
         first_name: string;
         last_name: string;
         telephone: string;
         password: string;
-      }
+      };
+      const res = await Service.prototype.getUserData();
+      const { email: emailInfo } = await res.json();
       const info = {} as Info;
-      info.email = email.value;
-      info.username = login.value;
-      info.first_name = myName.value;
-      info.last_name = surname.value;
-      info.telephone = phoneNum.value;
-      info.password = password.value;
+      if (emailInfo === email.value) {
+        info.username = login.value;
+        info.first_name = myName.value;
+        info.last_name = surname.value;
+        info.telephone = phoneNum.value;
+        info.password = password.value;
+      } else {
+        info.email = email.value;
+        info.username = login.value;
+        info.first_name = myName.value;
+        info.last_name = surname.value;
+        info.telephone = phoneNum.value;
+        info.password = password.value;
+      }
       try {
         loader.hidden = false;
         const response = await Service.prototype.updateUserData(info);

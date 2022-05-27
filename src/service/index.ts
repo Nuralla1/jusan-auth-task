@@ -101,7 +101,7 @@ export class Service {
   }
 
   updateUserData(obj: {
-    email: string;
+    email?: string;
     username: string;
     first_name: string;
     last_name: string;
