@@ -1,5 +1,15 @@
 export class Service {
-  async registrateUser(url, obj) {
+  async registrateUser(
+    url: string,
+    obj: {
+      email: string;
+      username: string;
+      first_name: string;
+      last_name: string;
+      telephone: string;
+      password: string;
+    }
+  ) {
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(obj),
@@ -15,7 +25,13 @@ export class Service {
     return await res.json();
   }
 
-  async signInUser(url, obj) {
+  async signInUser(
+    url: string,
+    obj: {
+      username: string;
+      password: string;
+    }
+  ) {
     const res = await fetch(url, {
       method: "POST",
       body: new URLSearchParams(obj),
@@ -31,7 +47,13 @@ export class Service {
     sessionStorage.setItem("Token", resJson.access_token);
   }
 
-  async createItem(url, obj) {
+  async createItem(
+    url: string,
+    obj: {
+      title: string;
+      description: string;
+    }
+  ) {
     const res = await fetch(url, {
       method: "POST",
       body: JSON.stringify(obj),
@@ -48,7 +70,7 @@ export class Service {
     return await res.json();
   }
 
-  async getItems(skip, limit) {
+  async getItems(skip: number, limit: number) {
     const res = await fetch(
       `http://10.130.19.30/api/items/?skip=${skip}&limit=${limit}`,
       {
@@ -78,7 +100,14 @@ export class Service {
     return res;
   }
 
-  updateUserData(obj) {
+  updateUserData(obj: {
+    email: string;
+    username: string;
+    first_name: string;
+    last_name: string;
+    telephone: string;
+    password: string;
+  }) {
     const res = fetch("http://10.130.19.30/api/users/me", {
       method: "PUT",
       headers: {
