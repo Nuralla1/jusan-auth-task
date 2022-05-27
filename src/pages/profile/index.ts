@@ -1,4 +1,5 @@
 import { Service } from "../../service";
+import { Validation } from "../../validation";
 
 export class Profile {
   render() {
@@ -67,6 +68,7 @@ export async function loadProfilePage() {
   const loader = document.querySelector(".load-back-ground") as HTMLDivElement;
   const saveBtn = document.querySelector(".save-btn") as HTMLButtonElement;
   const status = document.querySelector("#status") as HTMLDivElement;
+  const validation = new Validation();
 
   const email = document.querySelector(".email") as HTMLInputElement;
   const myName = document.querySelector(".name") as HTMLInputElement;
@@ -111,19 +113,19 @@ export async function loadProfilePage() {
     alert(error);
   }
   saveBtn.addEventListener("click", async () => {
-    checkEmail(email.value);
-    checkLogin(invalidLogin, login.value);
-    checkName(myName.value);
-    checkSurname(surname.value);
-    checkPhoneNum(phoneNum.value);
-    checkPassword(invalidPass, password.value);
+    validation.checkEmail(invalidEmail, email.value);
+    validation.checkLogin(invalidLogin, login.value);
+    validation.checkName(invalidName, myName.value);
+    validation.checkSurname(invalidSurname, surname.value);
+    validation.checkPhoneNum(invalidPhoneNum, phoneNum.value);
+    validation.checkPassword(invalidPass, password.value);
     if (
-      checkEmail(email.value) &&
-      checkLogin(invalidLogin, login.value) &&
-      checkName(myName.value) &&
-      checkSurname(surname.value) &&
-      checkPhoneNum(phoneNum.value) &&
-      checkPassword(invalidPass, password.value)
+      validation.checkEmail(invalidEmail, email.value) &&
+      validation.checkLogin(invalidLogin, login.value) &&
+      validation.checkName(invalidName, myName.value) &&
+      validation.checkSurname(invalidSurname, surname.value) &&
+      validation.checkPhoneNum(invalidPhoneNum, phoneNum.value) &&
+      validation.checkPassword(invalidPass, password.value)
     ) {
       type Info = {
         email: string;
@@ -190,225 +192,44 @@ export async function loadProfilePage() {
   }
 
   email.addEventListener("blur", () => {
-    checkEmail(email.value);
+    validation.checkEmail(invalidEmail, email.value);
   });
   email.addEventListener("focus", () => {
-    checkEmail(email.value);
+    validation.checkEmail(invalidEmail, email.value);
   });
 
   login.addEventListener("blur", () => {
-    checkLogin(invalidLogin, login.value);
+    validation.checkLogin(invalidLogin, login.value);
   });
   login.addEventListener("focus", () => {
-    checkLogin(invalidLogin, login.value);
+    validation.checkLogin(invalidLogin, login.value);
   });
 
   myName.addEventListener("blur", () => {
-    checkName(myName.value);
+    validation.checkName(invalidName, myName.value);
   });
   myName.addEventListener("focus", () => {
-    checkName(myName.value);
+    validation.checkName(invalidName, myName.value);
   });
 
   surname.addEventListener("blur", () => {
-    checkSurname(surname.value);
+    validation.checkSurname(invalidSurname, surname.value);
   });
   surname.addEventListener("focus", () => {
-    checkSurname(surname.value);
+    validation.checkSurname(invalidSurname, surname.value);
   });
 
   phoneNum.addEventListener("blur", () => {
-    checkPhoneNum(phoneNum.value);
+    validation.checkPhoneNum(invalidPhoneNum, phoneNum.value);
   });
   phoneNum.addEventListener("focus", () => {
-    checkPhoneNum(phoneNum.value);
+    validation.checkPhoneNum(invalidPhoneNum, phoneNum.value);
   });
 
   password.addEventListener("blur", () => {
-    checkPassword(invalidPass, password.value);
+    validation.checkPassword(invalidPass, password.value);
   });
   password.addEventListener("focus", () => {
-    checkPassword(invalidPass, password.value);
+    validation.checkPassword(invalidPass, password.value);
   });
-
-  function showRecommendation(
-    span: HTMLElement,
-    recommendMsg: string,
-    hiddenResult: boolean
-  ) {
-    span.textContent = recommendMsg;
-    span.hidden = hiddenResult;
-    return hiddenResult;
-  }
-
-  function checkEmail(value: string) {
-    const emailRegx =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-    if (!emailRegx.test(value)) {
-      const msg = "Email нейдействителен.";
-      return showRecommendation(invalidEmail, msg, false);
-    } else {
-      return showRecommendation(invalidEmail, "", true);
-    }
-  }
-
-  function checkLogin(span: HTMLElement, value: string) {
-    const loginRegx = /(?!^\d+$)^[-\w]{3,15}$/i;
-
-    if (!loginRegx.test(value)) {
-      if (value.length < 3) {
-        const msg = "Логин не должен быть короче 3 символов.";
-        return showRecommendation(span, msg, false);
-      }
-      if (value.length > 15) {
-        const msg = "Логин не должен быть длиннее 15 символов.";
-        return showRecommendation(span, msg, false);
-      }
-      if (/^\d+$/.test(value)) {
-        const msg = "Логин не должен состоять только из цифр.";
-        return showRecommendation(span, msg, false);
-      }
-      for (let c of value) {
-        if (/[а-я]/i.test(c)) {
-          const msg = "Логин  должен состоять из латинских букв.";
-          return showRecommendation(span, msg, false);
-        }
-        if (/[!@#$%^&*)(+=.<>?\\/]/.test(c) || /\s/.test(c)) {
-          const msg =
-            "Логин не должен содержать пробелов и спецсимволов, кроме нижнего подчеркивания и дефиса.";
-          return showRecommendation(span, msg, false);
-        }
-      }
-    } else {
-      return showRecommendation(span, "", true);
-    }
-  }
-
-  function checkName(value: string) {
-    const nameRegx = /^[a-z-а-я]+$/i;
-
-    if (!nameRegx.test(value)) {
-      if (value === "") {
-        const msg = "Поле не должно быть пустым.";
-        return showRecommendation(invalidName, msg, false);
-      }
-      for (let c of value) {
-        if (/\d/.test(c) || /\s/.test(c)) {
-          const msg = "Имя не должно содержать цифр и пробелов.";
-          return showRecommendation(invalidName, msg, false);
-        }
-        if (/[!@#$%^&*)(+=._<>\\/?]/.test(c)) {
-          const msg = "Имя не должно содержать cпецсимволов, кроме дефиса.";
-          return showRecommendation(invalidName, msg, false);
-        }
-      }
-    } else {
-      return showRecommendation(invalidName, "", true);
-    }
-  }
-
-  function checkSurname(value: string) {
-    const nameRegx = /^[a-z-а-я]+$/i;
-
-    if (!nameRegx.test(value)) {
-      if (value === "") {
-        const msg = "Поле не должно быть пустым.";
-        return showRecommendation(invalidSurname, msg, false);
-      }
-      for (let c of value) {
-        if (/\d/.test(c) || /\s/.test(c)) {
-          const msg = "Фамилия не должна содержать цифр и пробелов.";
-          return showRecommendation(invalidSurname, msg, false);
-        }
-        if (/[!@#$%^&*)(+=._<>\\/?]/.test(c)) {
-          const msg = "Фамилия не должна содержать cпецсимволов, кроме дефиса.";
-          return showRecommendation(invalidSurname, msg, false);
-        }
-      }
-    } else {
-      return showRecommendation(invalidSurname, "", true);
-    }
-  }
-
-  function checkPhoneNum(value: string) {
-    const phoneNumRegx = /^([+]?[\d]){8,15}$/;
-
-    if (!phoneNumRegx.test(value)) {
-      if (value.length < 8) {
-        const msg = "Номер телефона не должен быть короче 8 символов.";
-        return showRecommendation(invalidPhoneNum, msg, false);
-      }
-      if (value.length > 15) {
-        const msg = "Номер телефона не должен быть длиннее 15 символов.";
-        return showRecommendation(invalidPhoneNum, msg, false);
-      }
-      if (true) {
-        const msg = "Номер телефона  должен состоять из цифр.";
-        return showRecommendation(invalidPhoneNum, msg, false);
-      }
-    } else {
-      return showRecommendation(invalidPhoneNum, "", true);
-    }
-  }
-
-  function checkPassword(span: HTMLElement, value: string) {
-    const passwordRegx = /^(?=.*?[0-9])(?=.*?[!@#$%^&*)(+?=._<>\\/]).{8,30}$/i;
-
-    if (!passwordRegx.test(value)) {
-      if (value.length < 8) {
-        const msg = "Пароль не должен быть короче 8 символов.";
-        return showRecommendation(span, msg, false);
-      }
-      if (value.length > 30) {
-        const msg = "Пароль не должен быть длиннее 30 символов.";
-        return showRecommendation(span, msg, false);
-      }
-      if (true) {
-        const msg = "Пароль  должен содержать хотябы один спецсимвол и цифру.";
-        return showRecommendation(span, msg, false);
-      }
-    } else {
-      return showRecommendation(span, "", true);
-    }
-  }
 }
-
-// const container = document.querySelector(".profile_info");
-// const email = document.createElement("input");
-// const myName = document.createElement("input");
-// const surname = document.createElement("input");
-// const login = document.createElement("input");
-// const phoneNum = document.createElement("input");
-// email.className = "email";
-// myName.className = "name";
-// surname.className = "surname";
-// login.className = "login";
-// phoneNum.className = "phoneNum";
-// email.setAttribute("placeholder", "Почта");
-// myName.setAttribute("placeholder", "Имя");
-// surname.setAttribute("placeholder", "Фамилия");
-// login.setAttribute("placeholder", "Логин");
-// phoneNum.setAttribute("placeholder", "Телефон");
-
-// const invalidEmail = document.createElement("span");
-// const invalidLogin = document.createElement("span");
-// const invalidName = document.createElement("span");
-// const invalidSurname = document.createElement("span");
-// const invalidPhoneNum = document.createElement("span");
-// invalidEmail.setAttribute("id", "invalidEmail");
-// invalidLogin.setAttribute("id", "invalidLogin");
-// invalidName.setAttribute("id", "invalidName");
-// invalidSurname.setAttribute("id", "invalidSurname");
-// invalidPhoneNum.setAttribute("id", "invalidPhoneNum");
-
-// container.children[0].appendChild(email);
-// container.children[0].appendChild(invalidEmail);
-// container.children[1].appendChild(myName);
-// container.children[1].appendChild(invalidName);
-// container.children[2].appendChild(surname);
-// container.children[2].appendChild(invalidSurname);
-// container.children[3].appendChild(login);
-// container.children[3].appendChild(invalidLogin);
-// container.children[4].appendChild(phoneNum);
-// container.children[4].appendChild(invalidPhoneNum);
