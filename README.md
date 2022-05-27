@@ -8,9 +8,9 @@ This is v.3 of Auth Task. This version is written in TypeScript and aslo it has 
 
 In the project directory, you can run:
 
-### `npm install parcel --save-dev`
+### `npm init`
 
-Installs parcel to project directory, so it can assemble the app.
+Installs nope packet manager.
 
 ### `npm start`
 
