@@ -1,8 +1,8 @@
-# Jusan Auth Task v.2.0
+# Jusan Auth Task v.3.0
 
 ## Description
 
-This is v.2 of Auth Task. We saving validation from previous version of the task, but this version implementing client side rendering. So the result of task-2 is SPA. More than that in this version after autharization client will access main page with posts and he/she will be allowed to add posts to the forum.
+This is v.3 of Auth Task. This version is written in TypeScript and aslo it has one more page that allows user to change his profile info.
 
 ## Available Scripts
 
@@ -27,3 +27,4 @@ Functionality of this project allows you to:
 - login/register on the site
 - add posts;
 - check your posts;
+- edit your profile info
