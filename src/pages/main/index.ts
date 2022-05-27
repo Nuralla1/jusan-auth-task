@@ -34,7 +34,7 @@ export class MainPage {
 }
 
 export async function loadMainPage() {
-  if (!sessionStorage.length) {
+  if (!sessionStorage.getItem("Token")) {
     location.pathname = "/";
   }
   const loader = document.querySelector(".load-back-ground") as HTMLDivElement;

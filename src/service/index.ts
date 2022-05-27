@@ -82,6 +82,10 @@ export class Service {
         },
       }
     );
+    if (res.status === 403) {
+      sessionStorage.clear();
+      location.replace("/");
+    }
     if (!res.ok) {
       return res.statusText;
     }

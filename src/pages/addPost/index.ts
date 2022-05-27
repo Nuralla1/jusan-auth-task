@@ -37,7 +37,7 @@ export class AddPost {
 }
 
 export function loadAddPostPage() {
-  if (!sessionStorage.length) {
+  if (!sessionStorage.getItem("Token")) {
     location.pathname = "/";
   }
   const exit = document.getElementById("exit") as HTMLInputElement;

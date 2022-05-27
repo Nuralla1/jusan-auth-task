@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel ./src/index.html -p 3000",
     "build": "parcel build index.html",
-    "eslint": "eslint './src/**/*.js'",
+    "eslint": "eslint './src/**/*.ts'",
     "stylelint": "stylelint './src/style/*.css'"
   },
   "repository": {

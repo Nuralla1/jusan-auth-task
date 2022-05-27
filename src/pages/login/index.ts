@@ -25,7 +25,7 @@ export class Login {
 }
 
 export function loadLoginPage() {
-  if (sessionStorage.length) {
+  if (sessionStorage.getItem("Token")) {
     location.pathname = "/main";
   }
   const loader = document.querySelector(".load-back-ground") as HTMLDivElement;

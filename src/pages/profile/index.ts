@@ -61,6 +61,9 @@ export class Profile {
 }
 
 export async function loadProfilePage() {
+  if (!sessionStorage.getItem("Token")) {
+    location.pathname = "/";
+  }
   const loader = document.querySelector(".load-back-ground") as HTMLDivElement;
   const saveBtn = document.querySelector(".save-btn") as HTMLButtonElement;
   const status = document.querySelector("#status") as HTMLDivElement;
@@ -104,6 +107,7 @@ export async function loadProfilePage() {
     phoneNum.value = resJson.telephone;
     console.log(resJson);
   } catch (error) {
+    location.pathname = "/";
     alert(error);
   }
   saveBtn.addEventListener("click", async () => {
